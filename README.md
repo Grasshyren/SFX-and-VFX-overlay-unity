@@ -1,4 +1,4 @@
-Display visual effects and chat directly onto your desktop! Potentially really useful for people with one monitor. Program made in Unity 2021.3.1f1
+Display visual effects and chat directly onto your desktop! Potentially really useful for streamers with one monitor. Program made in Unity 2021.3.1f1
 
 Required Login credentials can be found in the installation folder \Configurable\Logins
 
