@@ -1,0 +1,37 @@
+bot_connect_message = Stream Desktop Overlay Connected
+// Symbol or sequence the bot will listen for at the start of a chat message (Can't use spaces!)
+bot_command_prefix = !
+bot_disconnect_message = Stream Desktop Overlay Disconnected
+
+chat_background_color = 0e0c1360
+chat_first_message_color = FFD700
+chat_font_color = FFFFFF
+chat_font_size = 16
+chat_highlighted_message_color = 9146FF
+// For vertical chat set chat_horizontal to false
+chat_horizontal = True
+chat_horizontal_top = False
+// Add any bot names here to not have them display on stream chat. Seperate names by ,
+chat_users_to_ignore = streamelements,tangiabot
+
+counter_enabled = True
+counter_font_color = ffffffd1
+counter_ui_x = 0
+counter_ui_y = 12
+counter_value = 0
+
+sfx_folder_path = C:\OBS Assets\SoundEffects\
+// Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%
+sfx_master_vol = 0.5
+
+tts_master_volume = 75
+
+// If a VFX is not full screen, it will default to this location
+vfx_default_x = 25
+vfx_default_y = 0
+vfx_folder_path = C:\OBS Assets\VFX\MOV\Processed
+// Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%
+vfx_master_vol = 0.5
+
+// Chat services for the bot to listen to
+twitch_enabled = True
