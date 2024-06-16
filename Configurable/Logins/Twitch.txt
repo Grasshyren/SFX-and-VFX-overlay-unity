@@ -1,0 +1,8 @@
+//A Twitch OAuth token which can be used to connect to the chat can be gotten from https://twitchapps.com/tmi/
+twitch_OAuth_Token = 
+
+//The username which was used to generate the OAuth token
+twitch_Username = 
+
+//The channel you wish to have the bot listen on, if different from username it won't send messages
+twitch_Channel_To_Listen_To = 
