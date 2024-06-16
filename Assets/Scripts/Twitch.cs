@@ -36,7 +36,6 @@ public class Twitch : MonoBehaviour
     string chatMessages;
     String twitch_OAuth_Token = ""; //A Twitch OAuth token which can be used to connect to the chat can be gotten from https://twitchapps.com/tmi/
     System.Timers.Timer reconnectTimer;
-    //[TODO] Add ability for user to add usernames (and .tolower them) to this list
     
     //[TODO] Add bool to use darkmode colors instead
     //private Dictionary<string, string> twitchDarkmodeNameColors = new Dictionary<string, string>()
@@ -531,9 +530,23 @@ public class Twitch : MonoBehaviour
                     data.IsFirstMessage = true;
                     var lowerCaseMessage = data.Message.ToLower();
                     lowerCaseMessage = lowerCaseMessage.Replace(" ", "");
-                    if (lowerCaseMessage.Contains(".ly"))
+                    string[] splitMessage = data.Message.Split();
+                    foreach (string word in splitMessage)
                     {
-                        return;
+                        if (word.Contains("/"))
+                        {
+                            if (word.Contains("."))
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    if (lowerCaseMessage.Contains("best"))
+                    {
+                        if (lowerCaseMessage.Contains("viewer") || lowerCaseMessage.Contains("follower"))
+                        {
+                            return;
+                        }
                     }
                     if (lowerCaseMessage.Contains("buy") || lowerCaseMessage.Contains("get") || lowerCaseMessage.Contains("offer") || lowerCaseMessage.Contains("cheap"))
                     {

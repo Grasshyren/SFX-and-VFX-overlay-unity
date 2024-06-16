@@ -13,12 +13,13 @@ public class VFX : MonoBehaviour
     public int vfx_Default_Y = 0; //[TODO] Not currently functional, but found URL with how to detect videos dimensions https://stackoverflow.com/questions/45307892/accessing-dimensions-width-height-from-a-videoplayer-source-url
     public string vfx_Folder_Path = "";
     public GameObject vfx_Folder_Disabledicon;
+    public int vfx_Limit = 5;
     public float vfx_Master_Vol = .5f;
 
 
     public AudioSource vfxAudioSource;
     string command = "v"; //[TODO] User Defined
-    int vfxLimit = 5;//[TODO] User Defined
+    
     int vfxSizeCap = 300; //[TODO] User Defined
     GameObject vfxPrefab;
     GameObject vfxCanvas;
@@ -110,7 +111,7 @@ public class VFX : MonoBehaviour
     //[TODO] Load Videos to RAM to make playing multiple easier on computer
     public void Play(string s)
     {
-        if (vfxCurrentlyPlaying.Count() >= vfxLimit)
+        if (vfxCurrentlyPlaying.Count() >= vfx_Limit)
             return;
 
         string vfx;

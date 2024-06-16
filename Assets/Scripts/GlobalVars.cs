@@ -23,13 +23,10 @@ using UnityEngine.Video;
 // 
 // Make it it's own Queue class with public AddToQueue Function <--- Seems like the best option so it can be modified later easier
 
-//[TODO] Create file with variables and add any missing ones to it on program start/end.
-
 public class GlobalVars : MonoBehaviour
 {
     public static String folderPath;
     GameObject vfxPrefab;
-    //Find and link all scripts here
     GameObject scriptsHolder;
     ChatParser chatparser;
     Counter counter;
@@ -42,8 +39,10 @@ public class GlobalVars : MonoBehaviour
     public static string bot_Connect_Message = "Stream Desktop Overlay Connected";
     public static string bot_Command_Prefix = "!";
     public static string bot_Disconnect_Message = "Stream Desktop Overlay Disconnected";
+    public static int screen_Height = 1080;
+    public static int screen_Width = 1920;
 
-    
+
     public static string twitch_Username = ""; //The username which was used to generate the OAuth token (make this lower case)
     public static string twitch_Channel_To_Listen_To = ""; //The username which was used to generate the OAuth token (make this lower case)
 
@@ -52,10 +51,21 @@ public class GlobalVars : MonoBehaviour
 
     //[TODO] Implement these into the settings file
 
-    public static float chat_Emote_OnScreenForSeconds = 5;
-    public static float chat_Emote_UI_Z = -501;
-    public static int screenWidth = 1920;
-    public static int screenHeight = 1080;
+    //[TODO] Implement Globalvars for vertical_Chat_X vertical_Chat_Y vertical_Chat_Width vertical_Chat_Height horizontal_Chat_Bottom (bool)
+    // chat message limit
+    // counter command
+    // counter name
+    //public string soundEndSymbol = ")"; //[TODO] Allow user to change. Default )
+    //public string soundStartSymbol = "("; //[TODO] Allow user to change. Default (
+    //public string command = "s"; //[TODO] Allow user to change.
+    //public List<string> commands = new List<string> { "k", "t" }; //[TODO] User input
+    //[TODO] Add bool to use darkmode colors instead
+    //add bool to not show pokecommunitymessages
+    //add bool to not tts pokecommunitymessages
+    //string command = "v"; //[TODO] User Defined
+
+    //int vfxSizeCap = 300; //[TODO] User Defined
+
 
 
 
@@ -149,7 +159,7 @@ public class GlobalVars : MonoBehaviour
         userInput = line.Substring(line.IndexOf("=") + 1);
         Debug.Log(userInput);
 
-        //[TODO] Implement Globalvars for vertical_Chat_X vertical_Chat_Y vertical_Chat_Width vertical_Chat_Height horizontal_Chat_Bottom (bool)
+        
         switch (variableFinder)
         {
             case "bot_connect_message":
@@ -165,9 +175,24 @@ public class GlobalVars : MonoBehaviour
                 bot_Disconnect_Message = userInput.Trim();
                 Debug.Log("bot_disconnect_message Changed to: " + bot_Disconnect_Message);
                 break;
+            case "chat_enabled":
+                userInput = userInput.Replace(" ", "");
+                bool.TryParse(userInput, out chatparser.chat_Enabled);
+                Debug.Log("chat_Enabled Changed to: " + chatparser.chat_Enabled);
+                break;
             case "chat_background_color":
                 chatparser.chat_Background_Color = userInput.Trim();
                 Debug.Log("chat_background_color Changed to: " + chatparser.chat_Background_Color);
+                break;
+            case "chat_emote_onscreenforseconds":
+                userInput = userInput.Replace(" ", "");
+                float.TryParse(userInput, out chatparser.chat_Emote_OnScreenForSeconds);
+                Debug.Log("chat_emote_onscreenforseconds Changed to: " + chatparser.chat_Emote_OnScreenForSeconds);
+                break;
+            case "chat_emote_ui_z":
+                userInput = userInput.Replace(" ", "");
+                float.TryParse(userInput, out chatparser.chat_Emote_UI_Z);
+                Debug.Log("chat_Emote_UI_Z Changed to: " + chatparser.chat_Emote_UI_Z);
                 break;
             case "chat_first_message_color":
                 chatparser.chat_First_Message_Color = userInput.Trim();
@@ -244,6 +269,16 @@ public class GlobalVars : MonoBehaviour
                 int.TryParse(userInput, out counter.counter_Value);
                 Debug.Log("counter_Value Changed to: " + counter.counter_Value);
                 break;
+            case "screen_height":
+                userInput = userInput.Replace(" ", "");
+                int.TryParse(userInput, out screen_Height);
+                Debug.Log("screenHeight Changed to: " + screen_Height);
+                break;
+            case "screen_width":
+                userInput = userInput.Replace(" ", "");
+                int.TryParse(userInput, out screen_Width);
+                Debug.Log("screenWidth Changed to: " + screen_Width);
+                break;
             case "sfx_folder_path":
                 userInput = userInput.Trim();
                 if (Directory.Exists(userInput))
@@ -295,6 +330,11 @@ public class GlobalVars : MonoBehaviour
                     Debug.Log("vfx_folder_path changed to: " + vfx.vfx_Folder_Path);
                 }
                 break;
+            case "vfx_limit":
+                userInput = userInput.Replace(" ", "");
+                int.TryParse(userInput, out vfx.vfx_Limit);
+                Debug.Log("vfx_Limit Changed to: " + vfx.vfx_Limit);
+                break;
             case "vfx_master_vol":
                 userInput = userInput.Replace(" ", "");
                 float.TryParse(userInput, out vfx.vfx_Master_Vol);
@@ -323,7 +363,10 @@ public class GlobalVars : MonoBehaviour
             lines.Add("bot_command_prefix = " + bot_Command_Prefix);
             lines.Add("bot_disconnect_message = " + bot_Disconnect_Message);
             lines.Add("");
+            lines.Add("chat_enabled = " + chatparser.chat_Enabled);
             lines.Add("chat_background_color = " + chatparser.chat_Background_Color);
+            lines.Add("chat_emote_onscreenforseconds = " + chatparser.chat_Emote_OnScreenForSeconds);
+            lines.Add("chat_emote_ui_z = " + chatparser.chat_Emote_UI_Z);
             lines.Add("chat_first_message_color = " + chatparser.chat_First_Message_Color);
             lines.Add("chat_font_color = " + chatparser.chat_Font_Color);
             lines.Add("chat_font_size = " + chatparser.chat_Font_Size);
@@ -354,6 +397,9 @@ public class GlobalVars : MonoBehaviour
             lines.Add("counter_ui_y = " + counter.counter_UI_Y);
             lines.Add("counter_value = " + counter.counter_Value);
             lines.Add("");
+            lines.Add("screen_height = " + screen_Height);
+            lines.Add("screen_width = " + screen_Width);
+            lines.Add("");
             lines.Add("sfx_folder_path = " + sfx.sfx_Folder_Path);
             lines.Add("// Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%");
             lines.Add("sfx_master_vol = " + sfx.sfx_Master_Vol);
@@ -364,6 +410,7 @@ public class GlobalVars : MonoBehaviour
             lines.Add("vfx_default_x = " + vfx.vfx_Default_X);
             lines.Add("vfx_default_y = " + vfx.vfx_Default_Y);
             lines.Add("vfx_folder_path = " + vfx.vfx_Folder_Path);
+            lines.Add("vfx_limit = " + vfx.vfx_Limit);
             lines.Add("// Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%");
             lines.Add("vfx_master_vol = " + vfx.vfx_Master_Vol);
             lines.Add("");

@@ -27,6 +27,9 @@ public class ChatParser : MonoBehaviour
 {
 
     public string chat_Background_Color = "0e0c1360";
+    public float chat_Emote_OnScreenForSeconds = 5;
+    public float chat_Emote_UI_Z = -501;
+    public bool chat_Enabled = true;
     public string chat_First_Message_Color = "FFD700";
     public string chat_Font_Color = "FFFFFF";
     public string chat_Highlighted_Message_Color = "9146FF";
@@ -158,11 +161,11 @@ public class ChatParser : MonoBehaviour
     {
         //[TODO] Consider using a switch case for speed / reduce redundant code
         //[TODO] Add to queue when conditions met instead of what is below
+        sFX.ParseMessageForSymbols(data);
         if (data.Message.ToLower().StartsWith(GlobalVars.bot_Command_Prefix))
         {
             counter.ParseMessageForCommand(data);
             ParseMessageForReload(data);
-            sFX.ParseMessageForSymbols(data);
             sFX.ParseMessageForCommand(data);
             vFX.ParseMessageForCommand(data);
             ttChan.ParseMessageForCommand(data);
@@ -174,6 +177,7 @@ public class ChatParser : MonoBehaviour
 
 
     }
+
     void ParseMessageForReload(ChatMessageData data)
     {
         string[] splitMessage = data.Message.Split(' ');
@@ -186,6 +190,13 @@ public class ChatParser : MonoBehaviour
     }
     public void Reload()
     {
+        if (chat_Enabled == false)
+        {
+            horizontalChatGroup.SetActive(false);
+            verticalChatGroup.SetActive(false);
+            return;
+        }
+
         AdjustFontSize();
         SetHorizontalChatBool(chat_Horizontal);
         TopHorizontalChatCheck();
@@ -261,6 +272,11 @@ public class ChatParser : MonoBehaviour
 
     public void ParseMessageForDisplay(ChatMessageData chatMessageData)
     {
+        if (chat_Enabled == false)
+        {
+            return;
+        }
+
         string s = "";
         GameObject chatUI;
         GameObject chatUI_Background;
@@ -389,6 +405,10 @@ public class ChatParser : MonoBehaviour
     }
     void TopHorizontalChatCheck()
     {
+        if (chat_Horizontal == false)
+        {
+            return;
+        }
         Debug.Log("TopCheck");
         GameObject horizontalChatGroup;
         horizontalChatGroup = GameObject.Find("HorizontalChatGroup");
@@ -492,8 +512,8 @@ public class ChatParser : MonoBehaviour
 
         float width;
         float height;
-        width = (float)(GlobalVars.screenWidth * 0.5);
-        height = (float)(GlobalVars.screenHeight * 0.5);
+        width = (float)(GlobalVars.screen_Width * 0.5);
+        height = (float)(GlobalVars.screen_Height * 0.5);
 
         if (rawIMG.texture.width < 50 || rawIMG.texture.height < 50)
         {
@@ -512,7 +532,7 @@ public class ChatParser : MonoBehaviour
         //[TODO] Does not take into account scaling for calculating edges
         //newEmote.transform.position = new Vector3(width, height, GlobalVars.emote_UI_Z);
         //newEmote.GetComponent<RectTransform>().position = new Vector3(diswidth, disheight, 1);
-        newEmote.transform.localPosition = new Vector3(width, height, GlobalVars.chat_Emote_UI_Z);
-        Destroy(newEmote, GlobalVars.chat_Emote_OnScreenForSeconds);
+        newEmote.transform.localPosition = new Vector3(width, height, chat_Emote_UI_Z);
+        Destroy(newEmote, chat_Emote_OnScreenForSeconds);
     }
 }

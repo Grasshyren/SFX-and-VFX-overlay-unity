@@ -1501,6 +1501,7 @@ MonoBehaviour:
   vfx_Default_Y: 0
   vfx_Folder_Path: 
   vfx_Folder_Disabledicon: {fileID: 0}
+  vfx_Limit: 5
   vfx_Master_Vol: 0.5
   vfxAudioSource: {fileID: 0}
 --- !u!1 &309129571
@@ -6362,7 +6363,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 2
   m_linkedTextComponent: {fileID: 0}
@@ -7699,6 +7700,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chat_Background_Color: 0e0c1360
+  chat_Emote_OnScreenForSeconds: 5
+  chat_Emote_UI_Z: -501
+  chat_Enabled: 1
   chat_First_Message_Color: FFD700
   chat_Font_Color: FFFFFF
   chat_Highlighted_Message_Color: 9146FF
@@ -10145,7 +10149,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 2
   m_linkedTextComponent: {fileID: 0}

@@ -13,7 +13,7 @@ public class Counter : MonoBehaviour
     public string counter_Font_Color = "ffffffd1";
     public string counter_Name = "Deaths: "; //[TODO] Allow user to change
     public int counter_UI_X = 0;
-    public int counter_UI_Y = 12;
+    public int counter_UI_Y = 16;
     public int counter_Value = 0;
 
     string command = "d"; //[TODO] Allow user to change. Default !d
@@ -33,7 +33,7 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DisplayCounter();
+        Reload();
     }
 
     // Update is called once per frame
@@ -46,7 +46,6 @@ public class Counter : MonoBehaviour
     {
         if (counter_Enabled == false)
         {
-            DisplayCounter();
             return;
         }
 
@@ -272,6 +271,7 @@ public class Counter : MonoBehaviour
         if (counter_Enabled)
         {
             counterUI.GetComponent<TextMeshProUGUI>().SetText(String.Format("<color=#{0}>{1}{2}", counter_Font_Color,counter_Name , counter_Value));
+            counterUI.transform.position = new Vector3(counter_UI_X, counter_UI_Y, counterUI.transform.position.z);
         }
         else
         {
@@ -281,6 +281,7 @@ public class Counter : MonoBehaviour
 
     public void Reload()
     {
+        counterUI.SetActive(counter_Enabled);
         DisplayCounter();
     }
 }

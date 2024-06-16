@@ -3,7 +3,10 @@ bot_connect_message = Stream Desktop Overlay Connected
 bot_command_prefix = !
 bot_disconnect_message = Stream Desktop Overlay Disconnected
 
+chat_enabled = True
 chat_background_color = 0e0c1360
+chat_emote_onscreenforseconds = 5
+chat_emote_ui_z = -501
 chat_first_message_color = FFD700
 chat_font_color = FFFFFF
 chat_font_size = 16
@@ -17,8 +20,11 @@ chat_users_to_ignore = streamelements,tangiabot
 counter_enabled = True
 counter_font_color = ffffffd1
 counter_ui_x = 0
-counter_ui_y = 12
+counter_ui_y = 16
 counter_value = 0
+
+screen_height = 1080
+screen_width = 1920
 
 sfx_folder_path = C:\OBS Assets\SoundEffects\
 // Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%
@@ -30,6 +36,7 @@ tts_master_volume = 75
 vfx_default_x = 25
 vfx_default_y = 0
 vfx_folder_path = C:\OBS Assets\VFX\MOV\Processed
+vfx_limit = 5
 // Volume needs to be between 0 and 1 with 1 being 100%, .5 for 50%
 vfx_master_vol = 0.5
 

@@ -23,7 +23,6 @@ public class SFX : MonoBehaviour
     string lastUser;
     string lastSFX;
     string queueDuplicate;
-    //[TODO] Let user define sound folder possibly using windows folder selector, then sound list
     string soundFolderPath = @"C:\OBS Assets\SoundEffects";
 
 
